@@ -20,6 +20,6 @@ services:
     command:
       - --providers.docker
       - --providers.docker.exposedbydefault=false
-      - --providers.entrypoint.http.address=:80
+      - --providers.entrypoints.http.address=:80
       - --accesslog
       - --log
