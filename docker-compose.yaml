@@ -42,3 +42,7 @@ services:
 
 volumes:
   traefik-public-certificates:
+
+networks:
+  default:
+    external: true
