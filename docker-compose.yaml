@@ -4,6 +4,8 @@ services:
   api:
     build: ./services/api/
     restart: always
+    ports:
+      - 8000:8000
     labels:
       - traefik.enable=true
       - traefik.http.services.app.loadbalancer.server.port=80
