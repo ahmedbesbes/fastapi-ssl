@@ -44,7 +44,3 @@ services:
 
 volumes:
   traefik-public-certificates:
-
-networks:
-  fastapi-ssl:
-    external: true
