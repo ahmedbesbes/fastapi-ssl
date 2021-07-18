@@ -11,7 +11,7 @@ services:
       - traefik.http.routers.app-http.entrypoints=http
       - traefik.http.routers.app-http.rule=Host(`fastapi.ahmedbesbes.com`)
 
-      - traefik.http.routers.app-http.entrypoints=https
+      - traefik.http.routers.app-https.entrypoints=https
       - traefik.http.routers.app-https.rule=Host(`fastapi.ahmedbesbes.com`)
 
       - traefik.http.routers.app-https.tls=true
