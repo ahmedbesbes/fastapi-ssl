@@ -4,8 +4,6 @@ services:
   api:
     build: ./services/api/
     restart: always
-    ports:
-      - 8000:8000
     labels:
       - traefik.enable=true
       - traefik.http.routers.app-http.rule=Host(`ssl.ahmedbesbes.com`)
