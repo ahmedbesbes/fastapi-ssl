@@ -21,6 +21,8 @@ services:
       - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
       - traefik.http.routers.app-http.middlewares=https-redirect
+    networks:
+      - fastapi-ssl
 
   traefik:
     image: traefik:v2.3
@@ -41,6 +43,12 @@ services:
       - --certificatesresolvers.le.acme.tlschallenge=true
       - --accesslog
       - --log
+    networks:
+      - fastapi-ssl
 
 volumes:
   traefik-public-certificates:
+
+networks:
+  fastapi-ssl:
+    external: true
