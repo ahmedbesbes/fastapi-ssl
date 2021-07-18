@@ -7,19 +7,38 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.app.loadbalancer.server.port=80
+
       - traefik.http.routers.app-http.entrypoints=http
       - traefik.http.routers.app-http.rule=Host(`fastapi.ahmedbesbes.com`)
+
+      - traefik.http.routers.app-http.entrypoints=https
+      - traefik.http.routers.app-https.rule=Host(`fastapi.ahmedbesbes.com`)
+
+      - traefik.http.routers.app-https.tls=true
+      - traefik.http.routers.app-https.certresolver=le
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+      - traefik.http.routers.app-http.middlewares=https-redirect
 
   traefik:
     image: traefik:v2.3
     ports:
       - 80:80
+      - 443:443
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-public-certificates:/certificates
     command:
       - --providers.docker
       - --providers.docker.exposedbydefault=false
-      - --providers.entrypoints.http.address=:80
+      - --entrypoints.http.address=:80
+      - --entrypoints.https.address=:443
+      - --certificatesresolvers.le.acme.email=ahmed.besbes@hotmail.com
+      - --certificatesresolvers.le.acme.storage=/certificates/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
       - --accesslog
       - --log
+
+volumes:
+  traefik-public-certificates:
