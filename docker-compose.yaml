@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  api:
+    build: ./services/api/
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.app.loadbalancer.server.port=80
+      - traefik.http.routers.app-http.entrypoints=http
+      - traefik.http.routers.app-http.rule=Host(`fastapi.ahmedbesbes.com`)
+
+  traefik:
+    image: traefik:v2.3
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+      - --providers.entrypoint.http.address=:80
+      - --accesslog
+      - --log
