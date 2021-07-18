@@ -51,4 +51,4 @@ volumes:
 
 networks:
   fastapi-ssl:
-    external: true
+    external: false
