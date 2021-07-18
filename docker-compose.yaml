@@ -8,7 +8,7 @@ services:
       - 8000:8000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.app-http.rule=Host(`fastapi.ahmedbesbes.com`)
+      - traefik.http.routers.app-http.rule=Host(`ssl.ahmedbesbes.com`)
       - traefik.http.routers.app-http.tls=true
       - traefik.http.routers.app-http.tls.certresolver=letsencrypt
 
