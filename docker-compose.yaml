@@ -15,7 +15,7 @@ services:
       - traefik.http.routers.app-https.rule=Host(`fastapi.ahmedbesbes.com`)
 
       - traefik.http.routers.app-https.tls=true
-      - traefik.http.routers.app-https.certresolver=le
+      - traefik.http.routers.app-https.tls=certresolver=le
       - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
       - traefik.http.routers.app-http.middlewares=https-redirect
